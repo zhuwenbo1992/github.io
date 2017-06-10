@@ -151,6 +151,281 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-article-one" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/10/article-one/">我的个人介绍</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/10/article-one/" class="archive-article-date">
+  	<time datetime="2017-06-10T01:31:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前言</p>
+<p>很多次想把博客从wordpress迁移到github，为此还特意学了一下Ruby和Jekyll。但由于迁移过程过于复杂，我又没有很多时间，这个计划就被搁置了。慢慢地文章积累越来越多了，更没有时间来整理了，所以就先用着wordpress吧。</p>
+<p>不过，了迁移博客我也有一些新的发现。hexo,一个基于Node的博客框架，同样可以实现基于github的博客，而且更轻更快，更适合Node的开发程序员。</p>
+<p>目录</p>
+<p>Hexo介绍<br>Hexo安装<br>Hexo的使用<br>发布到项目到github<br>替换皮肤<br>配置常用插件</p>
+<ol>
+<li>Hexo介绍</li>
+</ol>
+<p>Hexo 是一个简单地、轻量地、基于Node的一个静态博客框架。通过Hexo我们可以快速创建自己的博客，仅需要几条命令就可以完成。</p>
+<p>发布时，Hexo可以部署在自己的Node服务器上面，也可以部署github上面。对于个人用户来说，部署在github上好处颇多，不仅可以省去服务器的成本，还可以减少各种系统运维的麻烦事(系统管理、备份、网络)。所以，基于github的个人站点，正在开始流行起来….</p>
+<p>Hexo的官方网站：<a href="http://hexo.io/" target="_blank" rel="external">http://hexo.io/</a> ，也是基于Github构建的网站。</p>
+<ol>
+<li>Hexo安装</li>
+</ol>
+<p>系统环境：</p>
+<p>win7 64bit<br>node v0.10.5<br>npm 1.2.19<br>Hexo安装，要用全局安装，加-g参数。</p>
+<p>D:> npm install -g hexo<br>查看hexo的版本</p>
+<p>D:> hexo version<br>hexo: 2.5.5<br>os: Windows_NT 6.1.7601 win32 x64<br>http_parser: 1.0<br>node: 0.10.5<br>v8: 3.14.5.8<br>ares: 1.9.0-DEV<br>uv: 0.10.5<br>zlib: 1.2.3<br>modules: 11<br>openssl: 1.0.1e<br>安装好后，我们就可以使用Hexo创建项目了。</p>
+<p>D:\workspace\javascript&gt; hexo init nodejs-hexo<br>[info] Creating file: source/_posts/hello-world.md<br>[info] Creating file: package.json<br>[info] Creating file: .gitignore<br>[info] Copying file: _config.yml<br>[info] Copying file: scaffolds/draft.md<br>[info] Copying file: scaffolds/page.md<br>[info] Copying file: scaffolds/photo.md<br>[info] Copying file: scaffolds/post.md<br>[info] Creating folder: source/_drafts<br>[info] Creating folder: scripts<br>[info] Copying theme data…<br>[info] Initialization has been done. Start blogging with Hexo!<br>我们看到当前在目录下，出现了一个文件夹，包括初始化的文件。</p>
+<p>进入目录，并启动Hexo服务器。</p>
+<h1 id="进入目录"><a href="#进入目录" class="headerlink" title="进入目录"></a>进入目录</h1><p>D:\workspace\javascript&gt;cd nodejs-hexo</p>
+<h1 id="启动hexo服务器"><a href="#启动hexo服务器" class="headerlink" title="启动hexo服务器"></a>启动hexo服务器</h1><p>D:\workspace\nodejs-hexo&gt;hexo server<br>[info] Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a>. Press Ctrl+C to stop.<br>这时端口4000被打开了，我们能过浏览器打开地址，<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 。</p>
+<p>hexo-web</p>
+<p>出现了默认的网页界面，是不是很容易呢！！</p>
+<ol>
+<li>Hexo的使用</li>
+</ol>
+<p>接下来，我们要对Hexo做更全面的了解，才能做出个性化一的博客。</p>
+<p>3.1 目录和文件</p>
+<p>先来看一下，默认生成了哪些东西。</p>
+<p>hexo-folder</p>
+<p>scaffolds 脚手架，也就是一个工具模板<br>scripts 写文件的js，扩展hexo的功能<br>source 存放博客正文内容<br>source/_drafts 草稿箱<br>source/_posts 文件箱<br>themes 存放皮肤的目录<br>themes/landscape 默认的皮肤<br>_config.yml 全局的配置文件<br>db.json 静态常量<br>在这里，我们每次用到的就是_posts目录里的文件，而_config.yml文件和themes目录是第一次配置好就行了。</p>
+<p>_posts目录：Hexo是一个静态博客框架，因此没有数据库。文章内容都是以文本文件方式进行存储的，直接存储在_posts的目录。Hexo天生集成了markdown，我们可以直接使用markdown语法格式写博客，例如:hello-world.md。新增加一篇文章，就在_posts目录，新建一个xxx.md的文件。</p>
+<p>themes目录：是存放皮肤的，包括一套Javascript+CSS样式和基于EJS的模板设置。通过在themes目录下，新建一个子目录，就可以创建一套新的皮肤，当然我们也可以直接在landscape上面修改。</p>
+<p>3.2 全局配置</p>
+<p>_config.yml是全局的配置文件：很多的网站配置都在这个文件中定义。</p>
+<p>站点信息: 定义标题，作者，语言<br>URL: URL访问路径<br>文件目录: 正文的存储目录<br>写博客配置：文章标题，文章类型，外部链接等<br>目录和标签：默认分类，分类图，标签图<br>归档设置：归档的类型<br>服务器设置：IP，访问端口，日志输出<br>时间和日期格式： 时间显示格式，日期显示格式<br>分页设置：每页显示数量<br>评论：外挂的Disqus评论系统<br>插件和皮肤：换皮肤，安装插件<br>Markdown语言：markdown的标准<br>CSS的stylus格式：是否允许压缩<br>部署配置：github发布<br>查看文件：_config.yml</p>
+<h1 id="Hexo-Configuration"><a href="#Hexo-Configuration" class="headerlink" title="Hexo Configuration"></a>Hexo Configuration</h1><h2 id="Docs-http-hexo-io-docs-configuration-html"><a href="#Docs-http-hexo-io-docs-configuration-html" class="headerlink" title="Docs: http://hexo.io/docs/configuration.html"></a>Docs: <a href="http://hexo.io/docs/configuration.html" target="_blank" rel="external">http://hexo.io/docs/configuration.html</a></h2><h2 id="Source-https-github-com-tommy351-hexo"><a href="#Source-https-github-com-tommy351-hexo" class="headerlink" title="Source: https://github.com/tommy351/hexo/"></a>Source: <a href="https://github.com/tommy351/hexo/" target="_blank" rel="external">https://github.com/tommy351/hexo/</a></h2><h1 id="站点信息"><a href="#站点信息" class="headerlink" title="站点信息"></a>站点信息</h1><p>title: Hexo博客<br>subtitle: 新的开始<br>description: blog.fens.me<br>author: bsspirit<br>email: bsspirit@gmail.com<br>language: zh-CN</p>
+<h1 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h1><h2 id="If-your-site-is-put-in-a-subdirectory-set-url-as-‘http-yoursite-com-child‘-and-root-as-‘-child-‘"><a href="#If-your-site-is-put-in-a-subdirectory-set-url-as-‘http-yoursite-com-child‘-and-root-as-‘-child-‘" class="headerlink" title="If your site is put in a subdirectory, set url as ‘http://yoursite.com/child‘ and root as ‘/child/‘"></a>If your site is put in a subdirectory, set url as ‘<a href="http://yoursite.com/child">http://yoursite.com/child</a>‘ and root as ‘/child/‘</h2><p>url: <a href="http://blog.fens.me" target="_blank" rel="external">http://blog.fens.me</a><br>root: /<br>permalink: :year/:month/:day/:title/<br>tag_dir: tags<br>archive_dir: archives<br>category_dir: categories<br>code_dir: downloads/code</p>
+<h1 id="文件目录"><a href="#文件目录" class="headerlink" title="文件目录"></a>文件目录</h1><p>source_dir: source<br>public_dir: public</p>
+<h1 id="写博客配置"><a href="#写博客配置" class="headerlink" title="写博客配置"></a>写博客配置</h1><p>new_post_name: :title.md # File name of new posts<br>default_layout: post<br>auto_spacing: false # Add spaces between asian characters and western characters<br>titlecase: false # Transform title into titlecase<br>external_link: true # Open external links in new tab<br>max_open_file: 100<br>multi_thread: true<br>filename_case: 0<br>render_drafts: false<br>post_asset_folder: false<br>highlight:<br>  enable: true<br>  line_number: true<br>  tab_replace:</p>
+<h1 id="目录和标签"><a href="#目录和标签" class="headerlink" title="目录和标签"></a>目录和标签</h1><p>default_category: uncategorized<br>category_map:<br>tag_map:</p>
+<h1 id="归档设置"><a href="#归档设置" class="headerlink" title="归档设置"></a>归档设置</h1><h2 id="2-Enable-pagination"><a href="#2-Enable-pagination" class="headerlink" title="2: Enable pagination"></a>2: Enable pagination</h2><h2 id="1-Disable-pagination"><a href="#1-Disable-pagination" class="headerlink" title="1: Disable pagination"></a>1: Disable pagination</h2><h2 id="0-Fully-Disable"><a href="#0-Fully-Disable" class="headerlink" title="0: Fully Disable"></a>0: Fully Disable</h2><p>archive: 2<br>category: 2<br>tag: 2</p>
+<h1 id="服务器设置"><a href="#服务器设置" class="headerlink" title="服务器设置"></a>服务器设置</h1><h2 id="Hexo-uses-Connect-as-a-server"><a href="#Hexo-uses-Connect-as-a-server" class="headerlink" title="Hexo uses Connect as a server"></a>Hexo uses Connect as a server</h2><h2 id="You-can-customize-the-logger-format-as-defined-in"><a href="#You-can-customize-the-logger-format-as-defined-in" class="headerlink" title="You can customize the logger format as defined in"></a>You can customize the logger format as defined in</h2><h2 id="http-www-senchalabs-org-connect-logger-html"><a href="#http-www-senchalabs-org-connect-logger-html" class="headerlink" title="http://www.senchalabs.org/connect/logger.html"></a><a href="http://www.senchalabs.org/connect/logger.html" target="_blank" rel="external">http://www.senchalabs.org/connect/logger.html</a></h2><p>port: 4000<br>server_ip: 0.0.0.0<br>logger: false<br>logger_format:</p>
+<h1 id="时间和日期格式"><a href="#时间和日期格式" class="headerlink" title="时间和日期格式"></a>时间和日期格式</h1><h2 id="Hexo-uses-Moment-js-to-parse-and-display-date"><a href="#Hexo-uses-Moment-js-to-parse-and-display-date" class="headerlink" title="Hexo uses Moment.js to parse and display date"></a>Hexo uses Moment.js to parse and display date</h2><h2 id="You-can-customize-the-date-format-as-defined-in"><a href="#You-can-customize-the-date-format-as-defined-in" class="headerlink" title="You can customize the date format as defined in"></a>You can customize the date format as defined in</h2><h2 id="http-momentjs-com-docs-displaying-format"><a href="#http-momentjs-com-docs-displaying-format" class="headerlink" title="http://momentjs.com/docs/#/displaying/format/"></a><a href="http://momentjs.com/docs/#/displaying/format/" target="_blank" rel="external">http://momentjs.com/docs/#/displaying/format/</a></h2><p>date_format: MMM D YYYY<br>time_format: H:mm:ss</p>
+<h1 id="分页设置"><a href="#分页设置" class="headerlink" title="分页设置"></a>分页设置</h1><h2 id="Set-per-page-to-0-to-disable-pagination"><a href="#Set-per-page-to-0-to-disable-pagination" class="headerlink" title="Set per_page to 0 to disable pagination"></a>Set per_page to 0 to disable pagination</h2><p>per_page: 10<br>pagination_dir: page</p>
+<h1 id="评论"><a href="#评论" class="headerlink" title="评论"></a>评论</h1><p>disqus_shortname:</p>
+<h1 id="插件和皮肤"><a href="#插件和皮肤" class="headerlink" title="插件和皮肤"></a>插件和皮肤</h1><h2 id="Plugins-https-github-com-tommy351-hexo-wiki-Plugins"><a href="#Plugins-https-github-com-tommy351-hexo-wiki-Plugins" class="headerlink" title="Plugins: https://github.com/tommy351/hexo/wiki/Plugins"></a>Plugins: <a href="https://github.com/tommy351/hexo/wiki/Plugins" target="_blank" rel="external">https://github.com/tommy351/hexo/wiki/Plugins</a></h2><h2 id="Themes-https-github-com-tommy351-hexo-wiki-Themes"><a href="#Themes-https-github-com-tommy351-hexo-wiki-Themes" class="headerlink" title="Themes: https://github.com/tommy351/hexo/wiki/Themes"></a>Themes: <a href="https://github.com/tommy351/hexo/wiki/Themes" target="_blank" rel="external">https://github.com/tommy351/hexo/wiki/Themes</a></h2><p>theme: landscape<br>exclude_generator:</p>
+<h1 id="Markdown语法"><a href="#Markdown语法" class="headerlink" title="Markdown语法"></a>Markdown语法</h1><h2 id="https-github-com-chjj-marked"><a href="#https-github-com-chjj-marked" class="headerlink" title="https://github.com/chjj/marked"></a><a href="https://github.com/chjj/marked" target="_blank" rel="external">https://github.com/chjj/marked</a></h2><p>markdown:<br>  gfm: true<br>  pedantic: false<br>  sanitize: false<br>  tables: true<br>  breaks: true<br>  smartLists: true<br>  smartypants: true</p>
+<h1 id="CSS的stylus格式"><a href="#CSS的stylus格式" class="headerlink" title="CSS的stylus格式"></a>CSS的stylus格式</h1><p>stylus:<br>  compress: false</p>
+<h1 id="部署配置"><a href="#部署配置" class="headerlink" title="部署配置"></a>部署配置</h1><h2 id="Docs-http-hexo-io-docs-deployment-html"><a href="#Docs-http-hexo-io-docs-deployment-html" class="headerlink" title="Docs: http://hexo.io/docs/deployment.html"></a>Docs: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>  type:<br>3.3 命令行使用</p>
+<p>查看命令行帮助</p>
+<p>D:> hexo help<br>Usage: hexo </p>
+<p>Commands:<br>  help      Get help on a command<br>  init      Create a new Hexo folder<br>  migrate   Migrate your site from other system to Hexo<br>  version   Display version information</p>
+<p>Global Options:<br>  –config   Specify config file instead of using _config.yml<br>  –debug    Display all verbose messages in the terminal<br>  –safe     Disable all plugins and scripts<br>  –silent   Hide output on console</p>
+<p>For more help, you can use <code>hexo help [command]</code> for the detailed information<br>or you can check the docs: <a href="http://hexo.io/docs/" target="_blank" rel="external">http://hexo.io/docs/</a><br>命令行解释：</p>
+<p>help 查看帮助信息<br>init 创建一个hexo项目<br>migrate 从其他系统向hexo迁移<br>version 查看hexo的版本<br>–config参数，指定配置文件，代替默认的_config.yml<br>–debug参数，调试模式，输出所有日志信息<br>–safe参数，安全模式，禁用所有的插件和脚本<br>–silent参数，无日志输出模式<br>3.4 创建新文章</p>
+<p>接下来，我们开始新博客了，创建第一博客文章。Hexo建议通过命令行操作，当然你也可以直接在_posts目录下创建文件。</p>
+<p>通过命令创建新文章</p>
+<p>D:\workspace\javascript\nodejs-hexo&gt;hexo new 新的开始<br>[info] File created at D:\workspace\javascript\nodejs-hexo\source_posts\新的开始.md<br>在_posts目录下，就会生成文件：”新的开始.md”。</p>
+<p>hexo-post</p>
+<p>然后，我们编辑文件：”新的开始.md”，以markdown语法写文章，然后保存。</p>
+<p>title: 新的开始<br>date: 2014-05-07 18:44:12<br>tags:</p>
+<ul>
+<li>开始</li>
+<li>我</li>
+<li>日记<br>categories: 日志</li>
+</ul>
+<hr>
+<p>这是<strong>新的开始</strong>，我用hexo创建了第一篇文章。</p>
+<p>通过下面的命令，就可以创建新文章<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">D:\workspace\javascript\nodejs-hexo&gt;hexo new 新的开始</div><div class="line">[info] File created at D:\workspace\javascript\nodejs-hexo\source\_posts\新的开始.md</div></pre></td></tr></table></figure></p>
+<p>感觉非常好。<br>在命令行，启动服务器。</p>
+<p>D:\workspace\javascript\nodejs-hexo&gt;hexo server<br>[info] Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a>. Press Ctrl+C to stop.<br>通过浏览器打开， <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> ，就出现了我们新写的文章。</p>
+<p>hexo-index</p>
+<p>同时，网页的右侧还会出现Categories(目录)，Tags(标签)，Tag Cloud(标签云)的显示。</p>
+<p>3.5 文章的语法</p>
+<p>我们在写文章时，有一些语法的要求。</p>
+<p>语法包括3部分：</p>
+<p>基本信息：标题，发布日期，分类目录，标签，类型，固定发布链接<br>正文：markdown语法和Swig语法(掌握一个就行)<br>特殊标记：引用，链接，图片，代码块，iframe，youtube视频<br>3.5.1 基本信息</p>
+<p>必须在文件的顶部，—的行之前的部分。如：</p>
+<p>title: 新的开始<br>date: 2014-05-07 18:44:12<br>updated    : 2014-05-10 18:44:12<br>permalink: abc<br>tags:</p>
+<ul>
+<li>开始</li>
+<li>我</li>
+<li>日记<br>categories:</li>
+<li>日志</li>
+<li>第一天</li>
+</ul>
+<hr>
+<p>我们可以对刚才发的文章，做上面的修改，再看效果。</p>
+<p>3.5.2 正文</p>
+<p>hexo的正文要求使用markdown的语法，这里就不在多说，请自行查看markdwon的文档。</p>
+<p>3.5.3 特殊标记</p>
+<p>hexo对于一些有特殊标记 文字块，做了特殊的定义。</p>
+<p>引用</p>
+<h1 id="Swig语法"><a href="#Swig语法" class="headerlink" title="Swig语法"></a>Swig语法</h1><blockquote><p>Every interaction is both precious and an opportunity to delight.</p>
+<footer><strong>Seth Godin</strong><cite><a href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html" target="_blank" rel="external">Welcome to Island Marketing</a></cite></footer></blockquote>
+<h1 id="Markdown语法-1"><a href="#Markdown语法-1" class="headerlink" title="Markdown语法"></a>Markdown语法</h1><blockquote>
+<p>Every interaction is both precious and an opportunity to delight.<br>代码块</p>
+</blockquote>
+<h1 id="Swig语法-1"><a href="#Swig语法-1" class="headerlink" title="Swig语法"></a>Swig语法</h1><figure class="highlight plain"><figcaption><span>.compact</span><a href="http://underscorejs.org/#compact" target="_blank" rel="external">Underscore.js</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.compact([0, 1, false, 2, ‘’, 3]);</div><div class="line">=&gt; [1, 2, 3]</div></pre></td></tr></table></figure>
+<h1 id="Markdown语法-2"><a href="#Markdown语法-2" class="headerlink" title="Markdown语法"></a>Markdown语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.compact([0, 1, false, 2, ‘’, 3]);</div><div class="line">=&gt; [1, 2, 3]</div></pre></td></tr></table></figure>
+<p>链接</p>
+<a href="http://blog.fens.me" title="粉丝日志" target="_blank">粉丝日志</a>
+<h1 id="Markdown语法-3"><a href="#Markdown语法-3" class="headerlink" title="Markdown语法"></a>Markdown语法</h1><p><a href="http://blog.fens.me" target="_blank" rel="external">粉丝日志</a><br>图片，对于本地图片，需要在source目录下面新建一个目录images，然后把图片放到目录中。</p>
+<h1 id="Swig语法-2"><a href="#Swig语法-2" class="headerlink" title="Swig语法"></a>Swig语法</h1><img src="/images/fens.me.png" width="400" height="600" title="这是一张图片">
+<h1 id="Markdown语法-4"><a href="#Markdown语法-4" class="headerlink" title="Markdown语法"></a>Markdown语法</h1><p><img src="/images/fens.me.png" alt="这是一张图片"><br>在浏览器中看到效果。</p>
+<p>hexo-content</p>
+<p>我们发现Swig的语法比markdown语法有更多的配置项，可以让页面更丰富，下面显示完整的基于Swig代码。</p>
+<p>title: 新的开始<br>date: 2014-05-07 18:44:12<br>permalink: abc<br>tags:</p>
+<ul>
+<li>开始</li>
+<li>我</li>
+<li>日记<br>categories:</li>
+<li>日志</li>
+<li>第一天</li>
+</ul>
+<hr>
+<p>这是<strong>新的开始</strong>，我用hexo创建了第一篇文章。</p>
+<p>通过下面的命令，就可以创建新文章<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">D:\workspace\javascript\nodejs-hexo&gt;hexo new 新的开始</div><div class="line">[info] File created at D:\workspace\javascript\nodejs-hexo\source\_posts\新的开始.md</div></pre></td></tr></table></figure></p>
+<p>感觉非常好。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><blockquote><p>Every interaction is both precious and an opportunity to delight.</p>
+<footer><strong>Seth Godin</strong><cite><a href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html" target="_blank" rel="external">Welcome to Island Marketing</a></cite></footer></blockquote>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><figure class="highlight plain"><figcaption><span>.compact</span><a href="http://underscorejs.org/#compact" target="_blank" rel="external">Underscore.js</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.compact([0, 1, false, 2, ‘’, 3]);</div><div class="line">=&gt; [1, 2, 3]</div></pre></td></tr></table></figure>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><a href="http://blog.fens.me" title="粉丝日志" target="_blank">粉丝日志</a>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><img src="/images/fens.me.png" width="400" height="600" title="这是一张图片">
+<ol>
+<li>发布到项目到github</li>
+</ol>
+<p>4.1 静态化处理</p>
+<p>写完了文章，我们就可以发布了。要说明的一点是hexo的静态博客框架，那什么是静态博客呢？静态博客，是只包含html, javascript, css文件的网站，没有动态的脚本。虽然我们是用Node进行的开发，但博客的发布后就与Node无关了。在发布之前，我们要通过一条命令，把所有的文章都做静态化处理，就是生成对应的html, javascript, css，使得所有的文章都是由静态文件组成的。</p>
+<p>静态化命令</p>
+<p>D:\workspace\javascript\nodejs-hexo&gt;hexo generate<br>[info] Files loaded in 0.895s<br>[create] Public: js\script.js<br>[create] Public: css\fonts\fontawesome-webfont.svg<br>[create] Public: css\fonts\FontAwesome.otf<br>[create] Public: css\fonts\fontawesome-webfont.ttf<br>[create] Public: css\fonts\fontawesome-webfont.eot<br>[create] Public: css\fonts\fontawesome-webfont.woff<br>[create] Public: fancybox\blank.gif<br>[create] Public: fancybox\fancybox_loading@2x.gif<br>[create] Public: fancybox\fancybox_overlay.png<br>[create] Public: css\images\banner.jpg<br>[create] Public: fancybox\fancybox_sprite.png<br>[create] Public: fancybox\jquery.fancybox.css<br>[create] Public: fancybox\fancybox_loading.gif<br>[create] Public: fancybox\fancybox_sprite@2x.png<br>[create] Public: fancybox\jquery.fancybox.js<br>[create] Public: fancybox\jquery.fancybox.pack.js<br>[create] Public: fancybox\helpers\jquery.fancybox-buttons.js<br>[create] Public: fancybox\helpers\fancybox_buttons.png<br>[create] Public: fancybox\helpers\jquery.fancybox-buttons.css<br>[create] Public: fancybox\helpers\jquery.fancybox-media.js<br>[create] Public: fancybox\helpers\jquery.fancybox-thumbs.css<br>[create] Public: fancybox\helpers\jquery.fancybox-thumbs.js<br>[create] Public: archives\index.html<br>[create] Public: images\fens.me.png<br>[create] Public: archives\2014\index.html<br>[create] Public: archives\2014\05\index.html<br>[create] Public: css\style.css<br>[create] Public: index.html<br>[create] Public: categories\日志\index.html<br>[create] Public: categories\日志\第一天\index.html<br>[create] Public: 2014\05\07\abc\index.html<br>[create] Public: 2014\05\07\hello-world\index.html<br>[create] Public: tags\开始\index.html<br>[create] Public: tags\我\index.html<br>[create] Public: tags\日记\index.html<br>[info] 35 files generated in 0.711s<br>在本地目录下，会生成一个public的目录，里面包括了所有静态化的文件。</p>
+<p>4.2 发布到github</p>
+<p>接下来，我们把这个博客发布到github。</p>
+<p>在github中创建一个项目nodejs-hexo，项目地址：<a href="https://github.com/bsspirit/nodejs-hexo" target="_blank" rel="external">https://github.com/bsspirit/nodejs-hexo</a></p>
+<p>编辑全局配置文件：_config.yml，找到deploy的部分，设置github的项目地址。</p>
+<p>deploy:<br>  type: github<br>  repo: git@github.com:bsspirit/nodejs-hexo.git<br>然后，通过命令进行部署。</p>
+<p>D:\workspace\javascript\nodejs-hexo&gt;hexo deploy<br>[info] Start deploying: github<br>[info] Setting up GitHub deployment…<br>Initialized empty Git repository in D:/workspace/javascript/nodejs-hexo/.deploy/.git/<br>[master (root-commit) 43873d3] First commit<br> 1 file changed, 0 insertions(+), 0 deletions(-)<br> create mode 100644 placeholder<br>[info] Clearing .deploy folder…<br>[info] Copying files from public folder…</p>
+<p>// 省略部分输出</p>
+<p>Branch gh-pages set up to track remote branch gh-pages from github.<br>To git@github.com:bsspirit/nodejs-hexo.git</p>
+<ul>
+<li>[new branch]      gh-pages -&gt; gh-pages<br>[info] Deploy done: github<br>这个静态的web网站就被部署到了github，检查一下分支是gh-pages。gh-pages是github为了web项目特别设置的分支。</li>
+</ul>
+<p>hexo-github</p>
+<p>然后，点击”Settings”，找到GitHub Pages，提示“Your site is published at <a href="http://bsspirit.github.io/nodejs-hexo”，打开网页" target="_blank" rel="external">http://bsspirit.github.io/nodejs-hexo”，打开网页</a> <a href="http://bsspirit.github.io/nodejs-hexo，就是我们刚刚发布的站点。" target="_blank" rel="external">http://bsspirit.github.io/nodejs-hexo，就是我们刚刚发布的站点。</a></p>
+<p>hexo-github-page</p>
+<p>4.3 设置域名</p>
+<p>看起来css和js的加载路径不太对，不过没有关系。接下来，我们配置好域名，这个路径就会正确的。比如，我有一个域名是 52u.me，为了中国DNS解析，我先把域名绑定在Dnspod管理，再做跳转。</p>
+<p>域名有两种配置方式：</p>
+<p>主域名绑定：直接绑定主域名52u.me<br>子域名绑定：绑定子域名blog.52u.me<br>4.3.1 主域名绑定</p>
+<p>在dnspod控制台，设置主机记录@，类型A，到IP 192.30.252.153。</p>
+<p>dnspod-1</p>
+<p>大概等几分钟会生效。判断生效，对域名执行ping或者dig命令。</p>
+<p>D:\workspace\javascript\nodejs-hexo&gt;ping 52u.me</p>
+<p>正在 Ping 52u.me [192.30.252.153] 具有 32 字节的数据:<br>来自 192.30.252.153 的回复: 字节=32 时间=321ms TTL=48<br>来自 192.30.252.153 的回复: 字节=32 时间=325ms TTL=48<br>来自 192.30.252.153 的回复: 字节=32 时间=329ms TTL=48<br>来自 192.30.252.153 的回复: 字节=32 时间=326ms TTL=48</p>
+<p>192.30.252.153 的 Ping 统计信息:<br>    数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，<br>往返行程的估计时间(以毫秒为单位):<br>    最短 = 321ms，最长 = 329ms，平均 = 325ms<br>在github项目中，新建一个文件CNAME，文件中写出你要绑定的域名52u.me。通过浏览器，访问<a href="http://52u.me，就打开了我们建好的博客站点。" target="_blank" rel="external">http://52u.me，就打开了我们建好的博客站点。</a></p>
+<p>52u.me</p>
+<p>4.3.2 子域名绑定</p>
+<p>有时候，我们的主域名正在使用着，需要先新建一个博客绑定到子域名，比如: blog.52u.me。</p>
+<p>dnspod-2</p>
+<p>在dnspod控制台，我们要做3步设置。</p>
+<p>设置主机记录github，类型A，到IP 199.27.76.133<br>设置主机记录bsspirit.github.io，类型CNAME，到github.52u.me.<br>设置主机记录blog，类型CNAME，到 bsspirit.github.io<br>记得我们还要修改文件CNAME，改为blog.52u.me。通过浏览器，访问<a href="http://blog.52u.me，就可以打开了我们的博客站点了，而这次用的是二级域名。" target="_blank" rel="external">http://blog.52u.me，就可以打开了我们的博客站点了，而这次用的是二级域名。</a></p>
+<p>由于每次执行deploy的时候，gh-pages分支所有的文件都会被覆盖，所以我们最好在source目录下创建这个CNAME文件，这样每次部署就不用动手创建了。</p>
+<ol>
+<li>替换皮肤</li>
+</ol>
+<p>博客系统流行的原因，是因为他的个人性，而皮肤正式个性化的一种体现。</p>
+<p>利用hexo替换皮肤，还是比较简单的，3步完成。</p>
+<p>5.1 找到一个皮肤或者自己开发一个皮肤</p>
+<p>打开hexo的皮肤列表页面，你可以找到很多的皮肤，网页地址： <a href="https://github.com/tommy351/hexo/wiki/Themes。" target="_blank" rel="external">https://github.com/tommy351/hexo/wiki/Themes。</a></p>
+<p>5.2. 放到themes目录下</p>
+<p>比如，我觉得pacman(<a href="https://github.com/A-limon/pacman)这个皮肤还不错，我就可以下载皮肤到themes目录下面。" target="_blank" rel="external">https://github.com/A-limon/pacman)这个皮肤还不错，我就可以下载皮肤到themes目录下面。</a></p>
+<p>通过git命令下载皮肤</p>
+<p>git clone <a href="https://github.com/A-limon/pacman.git" target="_blank" rel="external">https://github.com/A-limon/pacman.git</a> themes/pacman<br>5.3. 在_config.yml指定皮肤</p>
+<p>编辑文件_config.yml，找到theme一行，改成 theme: pacman</p>
+<p>本地启动hexo服务器，打开浏览器 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
+<p>hexo-theme</p>
+<p>新皮肤的效果还不错吧，然后静态化处理，再发布到github，就完成了站点的改版。</p>
+<ol>
+<li>配置常用插件</li>
+</ol>
+<p>6.1 Disqus评论系统</p>
+<p>首先登陆<a href="http://disqus.com/" target="_blank" rel="external">http://disqus.com/</a> 网站，申请一个新网站的shortname，配置到_config.yml文件里，disqus_shortname: blog52ume</p>
+<p>disqus</p>
+<p>然后，你会得到一段js代码，把他复制文件 themes/pacman/layout/_partial/comment.ejs 。继续修改themes/pacman/layout/layout.ejs文件，增加对comment.ejs的引用。具体修改请详见代码。</p>
+<p>disqus-comment</p>
+<p>这样，评论系统就增加好了！！</p>
+<p>6.2 RSS订阅</p>
+<p>这个功能非常简单，因为已经有人写好了插件，我们只要安装插件就行了。</p>
+<p>D:\workspace\javascript\nodejs-hexo&gt;npm install hexo-generator-feed<br>npm WARN package.json hexo-site@2.5.5 No readme data!<br>npm http GET <a href="https://registry.npmjs.org/hexo-generator-feed" target="_blank" rel="external">https://registry.npmjs.org/hexo-generator-feed</a><br>npm http 304 <a href="https://registry.npmjs.org/hexo-generator-feed" target="_blank" rel="external">https://registry.npmjs.org/hexo-generator-feed</a><br>npm http GET <a href="https://registry.npmjs.org/ejs/0.8.5" target="_blank" rel="external">https://registry.npmjs.org/ejs/0.8.5</a><br>npm http GET <a href="https://registry.npmjs.org/lodash/2.4.1" target="_blank" rel="external">https://registry.npmjs.org/lodash/2.4.1</a><br>npm http 304 <a href="https://registry.npmjs.org/ejs/0.8.5" target="_blank" rel="external">https://registry.npmjs.org/ejs/0.8.5</a><br>npm http 200 <a href="https://registry.npmjs.org/lodash/2.4.1" target="_blank" rel="external">https://registry.npmjs.org/lodash/2.4.1</a><br>npm http GET <a href="https://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz" target="_blank" rel="external">https://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz</a><br>npm http 200 <a href="https://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz" target="_blank" rel="external">https://registry.npmjs.org/lodash/-/lodash-2.4.1.tgz</a><br>hexo-generator-feed@0.1.0 node_modules\hexo-generator-feed<br>├── ejs@0.8.5<br>└── lodash@2.4.1<br>启动服务器，用浏览器打开 <a href="http://localhost:4000/atom.xml，" target="_blank" rel="external">http://localhost:4000/atom.xml，</a> 就可以看到RSS已经生效了。</p>
+<p>6.3 Sitemap站长地图</p>
+<p>同样是一条命令，就可以完成。</p>
+<p>D:\workspace\javascript\nodejs-hexo&gt;npm install hexo-generator-sitemap<br>npm WARN package.json hexo-site@2.5.5 No readme data!<br>npm http GET <a href="https://registry.npmjs.org/hexo-generator-sitemap" target="_blank" rel="external">https://registry.npmjs.org/hexo-generator-sitemap</a><br>npm http 304 <a href="https://registry.npmjs.org/hexo-generator-sitemap" target="_blank" rel="external">https://registry.npmjs.org/hexo-generator-sitemap</a><br>npm http GET <a href="https://registry.npmjs.org/ejs/0.8.5" target="_blank" rel="external">https://registry.npmjs.org/ejs/0.8.5</a><br>npm http GET <a href="https://registry.npmjs.org/lodash/2.4.1" target="_blank" rel="external">https://registry.npmjs.org/lodash/2.4.1</a><br>npm http 304 <a href="https://registry.npmjs.org/lodash/2.4.1" target="_blank" rel="external">https://registry.npmjs.org/lodash/2.4.1</a><br>npm http 304 <a href="https://registry.npmjs.org/ejs/0.8.5" target="_blank" rel="external">https://registry.npmjs.org/ejs/0.8.5</a><br>hexo-generator-sitemap@0.1.1 node_modules\hexo-generator-sitemap<br>├── ejs@0.8.5<br>└── lodash@2.4.1<br>启动服务器，用浏览器打开 <a href="http://localhost:4000/sitemap.xml，" target="_blank" rel="external">http://localhost:4000/sitemap.xml，</a> 就可以看到sitemap已经生效了。</p>
+<p>6.4 mathjax数学公式</p>
+<p>有时候，我们还需要一些高级功能，比如在网页上显示数学公式。</p>
+<p>新建一个文件themes/pacman/layout/_partial/mathjax.ejs，找到mathjax的调用代码复制到文件。</p>
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><br></script><br>在themes/pacman/layout/_partial/after_footer.ejs 的最后一行，增加对mathjax的引用，详细内容请查看源代码。</p>
+<p>我们修改文章：source/_posts/新的开始.md</p>
+<p>增加公式：</p>
+<h2 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h2><p>$$J_\alpha(x)=\sum _{m=0}^\infty \frac{(-1)^ m}{m! \, \Gamma (m + \alpha + 1)}{\left({\frac{x}{2}}\right)}^{2 m + \alpha }$$<br>启动服务器，查看效果：</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/10/article-one/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-new-article" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
