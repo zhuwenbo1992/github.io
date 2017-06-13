@@ -151,6 +151,58 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-yun-install" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/13/yun-install/">yun 升级yum源</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/13/yun-install/" class="archive-article-date">
+  	<time datetime="2017-06-13T13:57:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>yum安装php7.0可以改变yum源<br>2016-09-09 14:44 2867人阅读 评论(1) 收藏 举报<br>转自：<a href="http://blog.csdn.net/zph1234/article/details/52486808" target="_blank" rel="external">http://blog.csdn.net/zph1234/article/details/52486808</a><br>1.如果之前已经安装我们先卸载一下<br>[plain] view plain copy<br>yum remove php php-common<br>2.由于Linux的yum源中的PHP不是最新版本，所以我们使用<a href="https://webtatic.com/的yum源来安装，可以直接参考https://webtatic.com/packages/php70/" target="_blank" rel="external">https://webtatic.com/的yum源来安装，可以直接参考https://webtatic.com/packages/php70/</a><br>[plain] view plain copy<br>rpm -Uvh <a href="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm" target="_blank" rel="external">https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</a><br>rpm -Uvh <a href="https://mirror.webtatic.com/yum/el7/webtatic-release.rpm" target="_blank" rel="external">https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</a>  </p>
+<p>3.好了现在我们来安装php,或者php-fpm<br>[plain] view plain copy<br>yum install php70w php70w-opcache<br>[plain] view plain copy<br>yum install php70w-fpm php70w-opcache<br>重启apache，或者php-fpm，打开phpinfo(),就可以看到7.0版本了<br>4.由于pecl中的扩展并不是所有的都支持php7，基本pecl支持的话，<a href="https://webtatic.com/就支持" target="_blank" rel="external">https://webtatic.com/就支持</a><br>比如安装pdo我们执行以下命令<br>[plain] view plain copy<br>yum install php70w-pdo  </p>
+<p>5.好好看看<a href="https://webtatic.com/packages/php70/" target="_blank" rel="external">https://webtatic.com/packages/php70/</a><br>6.如果安装最新版本，最好办法是源码安装，建议大家不要抵触，其实很简单的，要去摸索</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/13/yun-install/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-article-one" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
