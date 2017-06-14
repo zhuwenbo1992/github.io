@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/6 | 朱文波的个人博客</title>
+  <title>CentOS 7.2 yum安装LAMP环境 | 朱文波的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="朱文波的个人博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/06/index.html">
+  <meta name="description" content="配置防火墙，开启80、3306端口。CentOS 7.0默认使用的是firewall作为防火墙，这里改为iptables防火墙。 #停止firewall服务systemctl stop firewalld.service #禁止firewall开机启动systemctl disable firewalld.service #安装yum install iptables-services #编辑防火">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 7.2 yum安装LAMP环境">
+<meta property="og:url" content="http://yoursite.com/2017/06/14/text-one/index.html">
 <meta property="og:site_name" content="朱文波的个人博客">
+<meta property="og:description" content="配置防火墙，开启80、3306端口。CentOS 7.0默认使用的是firewall作为防火墙，这里改为iptables防火墙。 #停止firewall服务systemctl stop firewalld.service #禁止firewall开机启动systemctl disable firewalld.service #安装yum install iptables-services #编辑防火">
+<meta property="og:updated_time" content="2017-06-14T11:30:02.884Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="朱文波的个人博客">
+<meta name="twitter:title" content="CentOS 7.2 yum安装LAMP环境">
+<meta name="twitter:description" content="配置防火墙，开启80、3306端口。CentOS 7.0默认使用的是firewall作为防火墙，这里改为iptables防火墙。 #停止firewall服务systemctl stop firewalld.service #禁止firewall开机启动systemctl disable firewalld.service #安装yum install iptables-services #编辑防火">
   
     <link rel="alternative" href="/atom.xml" title="朱文波的个人博客" type="application/atom+xml">
   
@@ -149,159 +153,172 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-text-one" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      CentOS 7.2 yum安装LAMP环境
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/14/text-one/" class="archive-article-date">
+
+        
+        <a href="/2017/06/14/text-one/" class="archive-article-date">
   	<time datetime="2017-06-14T11:27:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-14</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/14/text-one/">CentOS 7.2 yum安装LAMP环境</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>配置防火墙，开启80、3306端口。CentOS 7.0默认使用的是firewall作为防火墙，这里改为iptables防火墙。</p>
+<p>#停止firewall服务<br>systemctl stop firewalld.service</p>
+<p>#禁止firewall开机启动<br>systemctl disable firewalld.service</p>
+<p>#安装<br>yum install iptables-services</p>
+<p>#编辑防火墙配置文件<br>vi /etc/sysconfig/iptables<br>加入红色的两行代码，请注意位置一定要对应。</p>
+<h1 id="Firewall-configuration-written-by-system-config-firewall"><a href="#Firewall-configuration-written-by-system-config-firewall" class="headerlink" title="Firewall configuration written by system-config-firewall"></a>Firewall configuration written by system-config-firewall</h1><h1 id="Manual-customization-of-this-file-is-not-recommended"><a href="#Manual-customization-of-this-file-is-not-recommended" class="headerlink" title="Manual customization of this file is not recommended."></a>Manual customization of this file is not recommended.</h1><p>*filter<br>:INPUT ACCEPT [0:0]<br>:FORWARD ACCEPT [0:0]<br>:OUTPUT ACCEPT [0:0]<br>-A INPUT -m state –state ESTABLISHED,RELATED -j ACCEPT<br>-A INPUT -p icmp -j ACCEPT<br>-A INPUT -i lo -j ACCEPT<br>-A INPUT -m state –state NEW -m tcp -p tcp –dport 22 -j ACCEPT<br>-A INPUT -m state –state NEW -m tcp -p tcp –dport 80 -j ACCEPT<br>-A INPUT -m state –state NEW -m tcp -p tcp –dport 3306 -j ACCEPT<br>-A INPUT -j REJECT –reject-with icmp-host-prohibited<br>-A FORWARD -j REJECT –reject-with icmp-host-prohibited<br>COMMIT<br>:wq! #保存退出</p>
+<p> #最后重启防火墙使配置生效<br>systemctl restart iptables.service</p>
+<p>#设置防火墙开机启动<br>systemctl enable iptables.service</p>
+<ol>
+<li>关闭seinux<br>#修改配置文件<br>vi /etc/selinux/config</li>
+</ol>
+<p>#SELINUX=enforcing #注释掉</p>
+<p>#SELINUXTYPE=targeted #注释掉<br>SELINUX=disabled #增加<br>:wq! #保存退出</p>
+<p>#使配置立即生效<br>setenforce 0<br>二、安装Lamp环境。</p>
+<ol>
+<li>安装apahce<br>yum install httpd</li>
+</ol>
+<p>可能会用到的：</p>
+<p>systemctl start httpd.service #启动apache</p>
+<p>systemctl stop httpd.service #停止apache</p>
+<p>systemctl restart httpd.service #重启apache</p>
+<p>systemctl enable httpd.service #设置apache开机启动<br>　　重启服务， systemctl restart httpd.service<br>　　输入localhost<br>　　出现之后代表已经安装上去了。</p>
+<ol>
+<li>安装mysql。<br>　　　　由于yum源上没有mysql-server。所以必须去官网下载，这里 我们用wget命令，直接获取。　　　　<h1 id="wget-http-dev-mysql-com-get-mysql-community-release-el7-5-noarch-rpm"><a href="#wget-http-dev-mysql-com-get-mysql-community-release-el7-5-noarch-rpm" class="headerlink" title="wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm"></a>wget <a href="http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm" target="_blank" rel="external">http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</a></h1></li>
+</ol>
+<h1 id="rpm-ivh-mysql-community-release-el7-5-noarch-rpm"><a href="#rpm-ivh-mysql-community-release-el7-5-noarch-rpm" class="headerlink" title="rpm -ivh mysql-community-release-el7-5.noarch.rpm"></a>rpm -ivh mysql-community-release-el7-5.noarch.rpm</h1><h1 id="yum-install-mysql-community-server"><a href="#yum-install-mysql-community-server" class="headerlink" title="yum install mysql-community-server"></a>yum install mysql-community-server</h1><pre><code>安装完成后重启mysql,  systemctl restarat mysqld.service
+</code></pre><p>　　　初入安装 root用户没有密码：　　　　<br>[root@linuxidc-web linuxidc]# mysql -u root </p>
+<p>#设置msyql密码为 123456<br>mysql&gt; set password for ‘root’@’localhost’ =password(‘123456’);</p>
+<p>#远程连接设置，所有以root账号连接的远程用户，设其密码为 123456<br>mysql&gt; grant all privileges on <em>.</em> to root@’%’identified by ‘123456’;</p>
+<p>#更新权限<br>mysql&gt;flush privileges; </p>
+<ol>
+<li>安装php<br>yum install php</li>
+</ol>
+<p>#安装PHP组件，使PHP支持mysql<br>yum install php-mysql php-gd libjpeg* php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-bcmath php-mhash</p>
+<p>#重启对应服务<br>systemctl restart mysqld.service<br>systemctl restart httpd.service<br>以上 安装 apahce 、mysql 、php  安装完毕。<br>查看安装环境版本：<br>cd  /var/www/html  ，新建index.php文件，输入：<br>&lt;?php<br>    phpinfo();</p>
+<p>最终查看为：php版本： yum安装php7.0可以改变yum源<br>4.升级php版本<br>1.如果之前已经安装我们先卸载一下<br>[plain] view plain copy<br>yum remove php php-common<br>2.由于Linux的yum源中的PHP不是最新版本，所以我们使用<a href="https://webtatic.com/的yum源来安装，可以直接参考https://webtatic.com/packages/php70/" target="_blank" rel="external">https://webtatic.com/的yum源来安装，可以直接参考https://webtatic.com/packages/php70/</a><br>[plain] view plain copy<br>rpm -Uvh <a href="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm" target="_blank" rel="external">https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</a><br>rpm -Uvh <a href="https://mirror.webtatic.com/yum/el7/webtatic-release.rpm" target="_blank" rel="external">https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</a>  </p>
+<p>3.好了现在我们来安装php,或者php-fpm<br>[plain] view plain copy<br>yum install php70w php70w-opcache<br>[plain] view plain copy<br>yum install php70w-fpm php70w-opcache<br>重启apache，或者php-fpm，打开phpinfo(),就可以看到7.0版本了<br>4.由于pecl中的扩展并不是所有的都支持php7，基本pecl支持的话，<a href="https://webtatic.com/就支持" target="_blank" rel="external">https://webtatic.com/就支持</a><br>比如安装pdo我们执行以下命令<br>[plain] view plain copy<br>yum install php70w-pdo  </p>
+<p>5.好好看看<a href="https://webtatic.com/packages/php70/" target="_blank" rel="external">https://webtatic.com/packages/php70/</a><br>6.如果安装最新版本，最好办法是源码安装，建议大家不要抵触，其实很简单的，要去摸索</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://www.myflyme.top/images/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://www.myflyme.top/images/alipay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_renren" data-cmd="renren"></a><a href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+      
+
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/13/yun-install/" class="archive-article-date">
-  	<time datetime="2017-06-13T13:57:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/13/yun-install/">yun 升级yum源</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/10/article-one/" class="archive-article-date">
-  	<time datetime="2017-06-10T01:31:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/10/article-one/">搭建个人博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/10/new-article/" class="archive-article-date">
-  	<time datetime="2017-06-10T00:56:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/10/new-article/">linux 常见命令大全</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-new">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/06/09/days/" class="archive-article-date">
-  	<time datetime="2017-06-09T11:59:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/09/days/">我的个人主页</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/06/13/yun-install/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">yun 升级yum源</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
-
-    
+</nav>
 
 
+
+
+
+  
+  
+  
+
+  
+  <div id="SOHUCS" sid="text-one" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "cyt3wR9T1"; 
+var conf = "09a724e3b85fabeb3501d05c92a6b53e"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+  
+
+  
+
+
+
+
+  <section id="comments">
+<!--高速版，加载速度快，使用前需测试页面的兼容性-->
+<div id="SOHUCS" sid="CentOS 7.2 yum安装LAMP环境" style="padding: 0px 30px 0px 46px;"></div>
+
+<script>
+  (function(){
+    var appid = 'cyt3wR9T1',
+    conf = '09a724e3b85fabeb3501d05c92a6b53e';
+    var doc = document,
+    s = doc.createElement('script'),
+    h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+    s.type = 'text/javascript';
+    s.charset = 'utf-8';
+    s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+    h.insertBefore(s,h.firstChild);
+    window.SCS_NO_IFRAME = true;
+  })()
+</script>
+  </section>
+  
           </div>
         </div>
       </div>
@@ -322,8 +339,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
